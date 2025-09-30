@@ -8,6 +8,7 @@ import {
   ErrorProfileNotFound,
 } from "@/ssr/AuthSSR";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { base_url } from "@/util/util";
 
 interface PageProps {
   authorization: string;
@@ -57,7 +58,7 @@ const AddTransactionPage: FC<PageProps> = ({authorization}) => {
   const fetchProducts = async () => {
 
     try {
-      const res = await new AxiosCaller("http://localhost:3001").call[
+      const res = await new AxiosCaller(base_url).call[
         "GET /products"
       ]({
         headers: { authorization },
@@ -120,7 +121,7 @@ const AddTransactionPage: FC<PageProps> = ({authorization}) => {
     if (!confirm("Are you sure you want to submit this transaction?")) return;
 
     try {
-      await new AxiosCaller("http://localhost:3001").call["POST /transaction"]({
+      await new AxiosCaller(base_url).call["POST /transaction"]({
         headers: { authorization },
         body: { data: items },
       });

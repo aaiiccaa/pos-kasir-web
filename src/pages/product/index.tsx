@@ -14,6 +14,7 @@ import {
   ErrorProfileNotFound,
 } from "@/ssr/AuthSSR";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { base_url } from "@/util/util";
 
 interface PageProps {
   authorization: string;
@@ -60,7 +61,7 @@ const ProductPage: FC<PageProps> = ({authorization}) => {
       const query: any = { limit, offset };
       if (selectedCategory !== "") query.category_id = selectedCategory;
 
-      const res = await new AxiosCaller("http://localhost:3001").call[
+      const res = await new AxiosCaller(base_url).call[
         "GET /products"
       ]({
         headers: { authorization },
@@ -75,7 +76,7 @@ const ProductPage: FC<PageProps> = ({authorization}) => {
 
   const fetchCategoryData = async () => {
     try {
-      const res = await new AxiosCaller("http://localhost:3001").call[
+      const res = await new AxiosCaller(base_url).call[
         "GET /category"
       ]({
         headers: { authorization },
@@ -95,7 +96,7 @@ const ProductPage: FC<PageProps> = ({authorization}) => {
     if (!confirmDelete) return;
 
     try {
-      await new AxiosCaller("http://localhost:3001").call[
+      await new AxiosCaller(base_url).call[
         "DELETE /product/:id"
       ]({
         headers: { authorization },

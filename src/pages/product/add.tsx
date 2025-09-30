@@ -8,6 +8,7 @@ import {
   ErrorProfileNotFound,
 } from "@/ssr/AuthSSR";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { base_url } from "@/util/util";
 
 interface PageProps {
   authorization: string;
@@ -47,7 +48,7 @@ const AddProductPage: FC<PageProps> = ({authorization}) => {
   const handleAdd = async (data: ProductData) => {
 
     try {
-      await new AxiosCaller("http://localhost:3001").call["POST /product"]({
+      await new AxiosCaller(base_url).call["POST /product"]({
         headers: { authorization },
         body: data,
       });

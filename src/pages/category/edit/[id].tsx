@@ -8,6 +8,7 @@ import {
   ErrorProfileNotFound,
 } from "@/ssr/AuthSSR";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { base_url } from "@/util/util";
 
 interface PageProps {
   authorization: string;
@@ -50,7 +51,7 @@ const EditCategoryPage: FC<PageProps> = ({authorization}) => {
   const fetchCategory = async () => {
 
     try {
-      const res = await new AxiosCaller("http://localhost:3001").call["GET /category/:id"]({
+      const res = await new AxiosCaller(base_url).call["GET /category/:id"]({
         headers: { authorization },
         paths: { id: Number(id) },
       });
@@ -67,7 +68,7 @@ const EditCategoryPage: FC<PageProps> = ({authorization}) => {
   const handleEdit = async (data: CategoryData) => {
 
     try {
-      await new AxiosCaller("http://localhost:3001").call["PUT /category/:id"]({
+      await new AxiosCaller(base_url).call["PUT /category/:id"]({
         headers: { authorization },
         paths: { id: Number(id) },
         body: data,

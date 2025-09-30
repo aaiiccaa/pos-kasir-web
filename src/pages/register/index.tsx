@@ -7,6 +7,7 @@ import {
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
+import { base_url } from "@/util/util";
 
 const RegisterPage: FC = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const RegisterPage: FC = () => {
 
   const registerHandler = async () => {
     try {
-      const res = await new AxiosCaller("http://localhost:3001").call["POST /register"]({
+      const res = await new AxiosCaller(base_url).call["POST /register"]({
         body: { email, username, password },
       });
 

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { category_response } from "@/api-lib/ts-schema/category_response";
 import { AxiosCaller } from "@/api-lib/axios-caller/AxiosCaller";
+import { base_url } from "@/util/util";
 
 export interface ProductData {
   name: string;
@@ -32,7 +33,7 @@ const ProductForm: FC<ProductFormProps> = ({
 
   const fetchCategoryData = async () => {
     try {
-      const res = await new AxiosCaller("http://localhost:3001").call[
+      const res = await new AxiosCaller(base_url).call[
         "GET /category"
       ]({
         headers: { authorization },

@@ -8,6 +8,7 @@ import {
 } from "@/ssr/AuthSSR";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import CategoryForm, { CategoryData } from "./CategoryForm";
+import { base_url } from "@/util/util";
 
 interface PageProps {
   authorization: string;
@@ -47,7 +48,7 @@ const AddCategoryPage: FC<PageProps> = ({authorization}) => {
   const handleAdd = async (data: CategoryData) => {
 
     try {
-      await new AxiosCaller("http://localhost:3001").call["POST /category"]({
+      await new AxiosCaller(base_url).call["POST /category"]({
         headers: { authorization },
         body: data,
       });

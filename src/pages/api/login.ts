@@ -1,4 +1,5 @@
 import { AxiosCaller } from "@/api-lib/axios-caller/AxiosCaller";
+import { base_url } from "@/util/util";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -12,7 +13,7 @@ export default async function handler(
       return res.redirect(`/login?error=username dan password wajib diisi`);
     }
 
-    const api_response = await new AxiosCaller("http://localhost:3001").call["POST /login"]({
+    const api_response = await new AxiosCaller(base_url).call["POST /login"]({
       body: {
         username: String(username),
         password: String(password),

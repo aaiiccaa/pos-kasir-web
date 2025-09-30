@@ -8,6 +8,7 @@ import {
   ErrorProfileNotFound,
 } from "@/ssr/AuthSSR";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { base_url } from "@/util/util";
 
 interface PageProps {
   authorization: string;
@@ -50,7 +51,7 @@ const EditProductPage: FC<PageProps> = ({authorization}) => {
   const fetchProduct = async () => {
 
     try {
-      const res = await new AxiosCaller("http://localhost:3001").call["GET /product/:id"]({
+      const res = await new AxiosCaller(base_url).call["GET /product/:id"]({
         headers: { authorization },
         paths: { id: Number(id) },
       });
@@ -72,7 +73,7 @@ const EditProductPage: FC<PageProps> = ({authorization}) => {
     if (!token || !id) return router.push("/login");
 
     try {
-      await new AxiosCaller("http://localhost:3001").call["PUT /product/:id"]({
+      await new AxiosCaller(base_url).call["PUT /product/:id"]({
         headers: { authorization: token },
         paths: { id: Number(id) },
         body: data,

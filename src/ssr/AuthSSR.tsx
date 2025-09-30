@@ -1,4 +1,5 @@
 import { AxiosCaller } from "@/api-lib/axios-caller/AxiosCaller";
+import { base_url } from "@/util/util";
 import { GetServerSidePropsContext } from "next";
 
 export class ErrorSessionNotFound extends Error {
@@ -29,7 +30,7 @@ export async function AuthSSR(
 
   let profile_data: any | null = null;
   try {
-    profile_data = await new AxiosCaller("http://localhost:3001").call[
+    profile_data = await new AxiosCaller(base_url).call[
       "GET /users"
     ]({
       headers: {

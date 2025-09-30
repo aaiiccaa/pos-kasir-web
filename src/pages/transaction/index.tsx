@@ -9,6 +9,7 @@ import {
   ErrorProfileNotFound,
 } from "@/ssr/AuthSSR";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { base_url } from "@/util/util";
 
 interface PageProps {
   authorization: string;
@@ -52,7 +53,7 @@ const TransactionPage: FC<PageProps> = ({authorization}) => {
 
     try {
       const query: any = { limit, offset };
-      const res = await new AxiosCaller("http://localhost:3001").call[
+      const res = await new AxiosCaller(base_url).call[
         "GET /transactions"
       ]({
         headers: { authorization },
@@ -71,7 +72,7 @@ const TransactionPage: FC<PageProps> = ({authorization}) => {
     if (!confirmDelete) return;
 
     try {
-      await new AxiosCaller("http://localhost:3001").call[
+      await new AxiosCaller(base_url).call[
         "DELETE /transaction/:id"
       ]({
         headers: { authorization },
