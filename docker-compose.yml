@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: pos-web
+    build: .
+    ports:
+      - "4000:3000"
